@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-// Using relative paths to fix the module resolution error
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import LeadPopup from "@/components/LeadPopup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,10 +15,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Updated metadata to match your actual brand
 export const metadata: Metadata = {
-  title: "Heshritha Educational Services | Fast-Track Your Admission",
-  description: "Expert profile evaluation, personalized university selection, and end-to-end application support.",
+  title: "Heshritha Educational Services",
+  description: "Personalized consulting, expert mentors, and strategic planning built to get you admitted to your dream university.",
+  keywords: ["educational consultancy", "college admissions", "engineering admissions", "MBBS admissions", "MBA admissions", "Hyderabad", "Telangana", "Andhra Pradesh"],
+  openGraph: {
+    title: "Heshritha Educational Services",
+    description: "15+ years of expert guidance. 10,000+ students admitted. Book your free consultation today.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -28,18 +32,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-white text-gray-900">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      {/*
+        suppressHydrationWarning silences the React hydration mismatch caused
+        by browser extensions like Grammarly injecting attributes into <body>.
+        This is safe and the recommended fix for this specific scenario.
+      */}
+      <body
+        suppressHydrationWarning
+        className="min-h-screen flex flex-col bg-white text-gray-900"
+      >
+        {/* Fixed glassmorphism navbar */}
         <Header />
-        
-        {/* flex-1 pushes the footer to the bottom of the page */}
-        <main className="flex-1 flex flex-col">
+
+        {/* Lead capture popup — appears 3s after first visit */}
+        <LeadPopup />
+
+        {/* Page content — flex-1 pushes footer to bottom */}
+        <main className="flex-1">
           {children}
         </main>
-        
+
+        {/* Site-wide footer */}
         <Footer />
       </body>
     </html>
