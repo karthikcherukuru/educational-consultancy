@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -376,6 +377,31 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+{/* ══ 7.5 MEET THE FOUNDER ════════════════════════════════════════ */}
+      <section className="py-14 sm:py-20 bg-gray-50">
+        <div className="container mx-auto px-5 sm:px-6">
+          <Link href="/founders" className="group block max-w-4xl mx-auto">
+            <div className="relative overflow-hidden rounded-3xl bg-black border border-gray-800 p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 transition-transform active:scale-[0.99] hover:-translate-y-0.5 duration-300">
+              <div className="relative w-28 h-28 sm:w-36 sm:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-white/10">
+                <Image src="/founder.png" alt="Durga Prasad — Chairman" fill className="object-cover object-center" />
+              </div>
+              <div className="text-center sm:text-left flex-1">
+                <p className="text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">Meet our founder</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Durga Prasad</h3>
+                <p className="text-sm sm:text-base text-gray-400 leading-relaxed mb-4">
+                  15 years of guiding students to the right path — and a team of 20+ counsellors carrying that mission forward.
+                </p>
+                <span className="inline-flex items-center gap-2 text-sm font-bold text-white">
+                  Read our story
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </Link>
         </div>
       </section>
 
