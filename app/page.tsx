@@ -6,17 +6,29 @@ import { useState } from "react";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
-const colleges = [
+const collegesRow1 = [
   { name: "Alliance University",        src: "/universities/alliance.png" },
+  { name: "DR. Subash University",      src: "/universities/DR.SUBASH UNIVERSITY.png" },
   { name: "Amrita Vishwa Vidyapeetham", src: "/universities/Amrita.png" },
-  { name: "Dhanalakshmi Srinivasan",    src: "/universities/dhanalakshmi.jpg" },
+  { name: "Starex University",          src: "/universities/starex.png" },
   { name: "Hindustan Institute",        src: "/universities/hindustan.png" },
+  { name: "ITM University",             src: "/universities/ITM.jpg" },
   { name: "Marwadi University",         src: "/universities/marwadi.webp" },
-  { name: "Presidency University",      src: "/universities/Presidency.png" },
+  { name: "Kishkindha University",      src: "/universities/kishkindha.jpg" },
   { name: "SRM Institute",              src: "/universities/srm.png" },
-  { name: "Vel Tech",                   src: "/universities/veltech.png" },
-  { name: "VIT Chennai",                src: "/universities/VITcc.png" },
+  { name: "Uttaranchal University",     src: "/universities/UTTARANCHAL UNIVERSITY.png" },
+];
+
+const collegesRow2 = [
+  { name: "VIT Chennai",                src: "/universities/vit.png" },
+  { name: "Harsha Institutions",        src: "/universities/HARSHA INSTITUTIONS.png" },
   { name: "Woxsen University",          src: "/universities/Woxsen.jpg" },
+  { name: "AVIT",                       src: "/universities/avit.png" },
+  { name: "Presidency University",      src: "/universities/Presidency.png" },
+  { name: "P P Savani University",      src: "/universities/ppsu-p_p_savani_university.png" },
+  { name: "Vel Tech",                   src: "/universities/veltech.png" },
+  { name: "Joy University",             src: "/universities/joy.png" },
+  { name: "Dhanalakshmi Srinivasan",    src: "/universities/dhanalakshmi.jpg" },
   { name: "Atria University",           src: "/universities/atria.png" },
 ];
 
@@ -221,13 +233,32 @@ export default function Home() {
           Our students study at
         </p>
         <style dangerouslySetInnerHTML={{__html:`
-          @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-          .marquee-track { animation: marquee 35s linear infinite; width: max-content; }
-          .marquee-track:hover { animation-play-state: paused; }
+          @keyframes marquee-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+          @keyframes marquee-right { 0%{transform:translateX(-50%)} 100%{transform:translateX(0)} }
+          .marquee-left { animation: marquee-left 40s linear infinite; width: max-content; }
+          .marquee-right { animation: marquee-right 40s linear infinite; width: max-content; }
+          .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         `}} />
+
+        {/* Row 1 — scrolls left */}
+        <div className="relative w-full flex overflow-x-hidden mb-5 sm:mb-8">
+          <div className="flex marquee-left items-center">
+            {[...collegesRow1, ...collegesRow1].map((c, i) => (
+              <div key={i} className="flex items-center justify-center mx-6 sm:mx-10" title={c.name}>
+                <div className="relative h-10 w-24 sm:h-16 sm:w-36">
+                  <Image src={c.src} alt={c.name} fill sizes="(max-width: 640px) 96px, 144px" className="object-contain" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="absolute inset-y-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+        </div>
+
+        {/* Row 2 — scrolls right */}
         <div className="relative w-full flex overflow-x-hidden">
-          <div className="flex marquee-track items-center">
-            {[...colleges, ...colleges].map((c, i) => (
+          <div className="flex marquee-right items-center">
+            {[...collegesRow2, ...collegesRow2].map((c, i) => (
               <div key={i} className="flex items-center justify-center mx-6 sm:mx-10" title={c.name}>
                 <div className="relative h-10 w-24 sm:h-16 sm:w-36">
                   <Image src={c.src} alt={c.name} fill className="object-contain" />
